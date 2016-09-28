@@ -27,13 +27,36 @@ app.get('/api/todo', (req, res, err) => {
 	Todo
 		.find()
 		.then( todos => {
-			console.log('todos', todos)	
 			res.json({todos})
 		})
 		.catch(err)
 })
 
-mongoose.promise = Promise
+app.post('/api/todo', (req, res, err) => {
+	Todo
+		.create(req.body)
+		.then( job => res.json(job))
+		.catch(err)
+})
+
+app.delete('/api/todo/:id', (req, res, err) => {
+	console.log('_id', req.params.id)
+	Todo
+		.remove({_id: req.params.id})
+		.then( response => res.json(response))
+		.catch(err)
+})
+
+app.patch('/api/todo/', ({body: {_id, complete}}, res, err) => {
+	console.log('req.body.comlete', _id, complete)
+	res.send('got patch request')
+	Todo
+		.update({ _id }, {complete: !complete})
+		.then( response => res.json(response))
+		.catch(err)
+})
+
+mongoose.Promise = Promise
 
 mongoose.connect(MONGODB_URL, () => {
 	app.listen(port, () => {

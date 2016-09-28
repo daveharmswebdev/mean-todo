@@ -1,7 +1,16 @@
 <h1>Hello Main</h1>
 
+<form ng-submit="addNewJob()">
+	<input type="text" ng-model="newTaskTitle" />
+	<input type="text" ng-model="newTaskDueDate" />
+	<input class="btn btn-default" type="submit" />
+</form>
+
 <ul>
-	<li ng-repeat="job in jobs">
-		{{job.task}} | {{job.dueDate}} | {{job.complete}}
+	<li class='job' ng-repeat="job in jobs">
+		<p class='task'>{{job.task}}</p>
+		<p class='dueDate'>{{job.dueDate}}</p>
+		<p class='complete' ng-click="complete(job)">{{job.complete}}</p>
+		<p id={{job._id}} ng-click="destroy(job)">X</p>
 	</li>
 </ul>

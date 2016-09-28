@@ -1,0 +1,6 @@
+.job > p {
+	display: inline-block;
+	margin: 1rem;
+	border: 1px dashed black;
+	width: 15rem;
+}
